@@ -33,22 +33,22 @@ Notion liée au concept de *cloud computing*.
 
 Un acronyme marketing recouvrant des logiques technologiques.
 
-* 	IaaS : Infrastructure as a Service
+* 	**IaaS** : Infrastructure as a Service
 	* 	Location à la demande de ressources (machines virtuelles, réseau, espace disque de stockage, etc.)
-* 	PaaS : Platform as a Service.
+* 	**PaaS** : Platform as a Service.
 	* 	Location d'une stack logicielle.
 	* 	Par exemple, déploiement d'application PHP dans [Heroku](https://www.heroku.com/)
-* 	SaaS : Software as a Service :
+* 	**SaaS** : Software as a Service :
 	* 	Location d'un logiciel. 
 	* 	Par exemple, [Microsoft Office365](https://www.office.com). 
-* 	FaaS : Function as a Service
+* 	**FaaS** : Function as a Service
 	* 	Location de ressources abstraites pour le déploiement de microservices.
 	* 	Par exemple, 
 
 
 **Serverless != FaaS** : 
 
-* toute application serverless n'est pas FaaS ;
+* toute application serverless n'est pas FaaS (exemple: AWS ECS)
 * tout FaaS est serverless.
 
 -----
@@ -57,11 +57,23 @@ Un acronyme marketing recouvrant des logiques technologiques.
 
 Pas de standard serverless.
 
-Les *clouders* proposent chacun leur solution (fonctionnalités similaires mais ) :
+Les *clouders* proposent chacun leur solution (fonctionnalités similaires mais implémentations différentes) :
 
-* AWS Lambda
-* Azure Functions
-* Google Functions
+* [AWS Lambda](https://aws.amazon.com/fr/lambda/)
+* [Azure Functions](https://docs.microsoft.com/fr-fr/azure/azure-functions/)
+* [Google Cloud Functions](https://cloud.google.com/functions/)
+* ...
+
+-----
+
+# Quelques exemples d'applications
+
+* Fournir des services REST à différents clients : applications mobiles, web, objets connectés.
+* Gérer des séquences d'exécution :
+	* récupérer la dernière image d'une webcam ;
+	* traiter l'image, la recadrer, etc.
+	* publier l'image ;
+* Utiliser des évènements via d'autres protocoles que HTTP ([message broker](https://fr.wikipedia.org/wiki/Agent_de_messages))
 * ...
 
 -----
@@ -81,7 +93,7 @@ Les *clouders* proposent chacun leur solution (fonctionnalités similaires mais 
 
 ## Abstraction du fournisseur
 
-* [Serverless](https://serverless.io) (attention ! risque de confusion avec le concept générique d'informatique serverless)
+* [Serverless](https://serverless.io) (**attention** ! risque de confusion avec le concept générique d'informatique serverless)
 
 -----
 
@@ -149,12 +161,26 @@ Le FaaS peut s'inscrire dans une démarche *devops* en limitant la partie *ops* 
 
 
 -----
-# Implémenter une fonction en tant que service
+# S'exercer avec [Lambda-Local](https://github.com/ashiina/lambda-local)
 
-### Fonction de base AWS Lambda
+```bash
+# Installons lambda-local
+npm install -g lambda-local
+
+# Création du projet 
+export APP_HOME="/home/workspace/app" # Chemin à adapter
+mkdir -p ${APP_HOME} \
+  && cd ${APP_HOME} \
+  && npm init # Répondre aux questions...
+```
+
+-----
+# Notre première fonction en tant que service
+
+### La fonction de base AWS Lambda (tout protocole de transport)
 
 ```javascript
-exports.handler =  async function(event, context) {
+exports.handler =  async (event, context) => {
   console.log('EVENT: \n' + JSON.stringify(event, null, 2))
   return context.logStreamName
 }
@@ -183,9 +209,16 @@ exports.handler =  async (event, context) => {
 
 **Invocation** : par une simple requête HTTP.
 
+-----
+# Utiliser [docker-lambda]()
+
+-----
+
 # Avec le framework d'abstraction [Serverless](https://www.serverless.com)
 
 `#todo`
+
+-----
 
 # Risques
 
@@ -193,6 +226,8 @@ exports.handler =  async (event, context) => {
 
 * Tests d'intégration des microservices (faire du TDD)
 * Performances de chaque service (on peut croire sans impact, mais ne pas oublier les coûts)
+
+-----
 
 # Merci !
 
