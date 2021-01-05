@@ -11,6 +11,19 @@
 
 -----
 
+# Prérequis
+
+* Installeur [NVM](https://github.com/nvm-sh/nvm)
+* [Node v12.x](https://www.nodejs.org)
+* [Docker](https://www.docker.com/)  
+* Cloner le dépôt `git` contenant support, exemples et exercices : 
+
+```bash
+git clone https://github.com/fmichaud/universite-formation-serverless-support
+```
+
+-----
+
 # L'informatique serverless
 
 * Exécuter du code...
@@ -177,16 +190,25 @@ mkdir -p ${APP_HOME} \
 -----
 # Notre première fonction en tant que service
 
-### La fonction de base AWS Lambda (tout protocole de transport)
+### Une fonction comme les autres !
 
 ```javascript
-exports.handler =  async (event, context) => {
-  console.log('EVENT: \n' + JSON.stringify(event, null, 2))
-  return context.logStreamName
+exports.handler = async function (event, context, callback) {
+	LOG.info('Function: returns todo list.')
+	try {
+		let res = await axios.get('https://jsonplaceholder.typicode.com/todos/')
+		callback(null, res.data)
+	} catch (err) {
+		callback(err)
+	}
 }
 ```
 
-Invocation : `#todo`
+### Invocation
+
+Le client [Lambda-Local](https://github.com/ashiina/lambda-local) permet d'invoquer une fonction :
+  * afin de la tester localement...
+  * avant de déployer celle-ci dans le _cloud_ 
 
 ### Fonction transportée en HTTP AWS Lambda
 

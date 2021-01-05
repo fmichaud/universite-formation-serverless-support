@@ -1,0 +1,33 @@
+{
+  "name": "com-fmichaud-universite-formation-serverless-exemple-local-lambda",
+  "version": "0.0.1",
+  "description": "Un exemple d'utilisation du framework Local-Lambda.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmichaud/universite-formation-serverless-support.git"
+  },
+  "keywords": [
+    "université",
+    "formation",
+    "faas",
+    "serverless",
+    "aws",
+    "lambda",
+    "lambda-local"
+  ],
+  "author": "François Michaud",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/fmichaud/universite-formation-serverless-support/issues"
+  },
+  "homepage": "https://github.com/fmichaud/universite-formation-serverless-support#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "lambda-local": "^1.7.4",
+    "winston": "^3.3.3"
+  }
+}
