@@ -98,9 +98,9 @@ Les *clouders* proposent chacun leur solution (fonctionnalités similaires mais 
 * Des frameworks sont apparus pour compenser l'absence de normalisation :
 	* [OpenFaaS](https://www.openfaas.com/)
 	* [FnProject](https://fnproject.io/)
-	* [OpenWiskh]()
-	* [Kubeless]()
-	* [Fission]()
+	* [OpenWiskh](https://openwhisk.apache.org/) - _fondation Apache_
+	* [Kubeless](https://kubeless.io/)
+	* [Fission](https://fission.io/)
 * Se déploient généralement sur des clusters, de type Kubernetes.
 * [Comparatif des solutions](https://winderresearch.com/a-comparison-of-serverless-frameworks-for-kubernetes-openfaas-openwhisk-fission-kubeless-and-more/) 
 
@@ -152,6 +152,7 @@ Pour être accessible, les services doivent être utiliser un "moyen de transpor
 -----
 # FaaS : les avantages 
 
+* Les _clouders_ proposent une large variété de langages de programmation.
 * Le développeur peut se concentrer sur le code en raison...
 * ... du déploiement simplifié.
 * Orchestration des services
@@ -209,6 +210,21 @@ exports.handler = async function (event, context, callback) {
 Le client [Lambda-Local](https://github.com/ashiina/lambda-local) permet d'invoquer une fonction :
   * afin de la tester localement...
   * avant de déployer celle-ci dans le _cloud_ 
+
+**Attention !** 
+
+* La fonction est opérationnelle, mais toujours inaccessible en HTTP. 
+* Pour ce faire, il convient de mettre en place une API Gateway !
+
+
+#### Exercice
+
+Développer trois fonctions :
+
+1. Filtrer les tâches par identifiant d'utilisateur.
+	* l'identifiant de l'utilisateur recherché doit être passé en paramètre de l'appel.
+2. Filtrer les tâches par un mot de leur titre.
+3. Stocker en base de données 
 
 ### Fonction transportée en HTTP AWS Lambda
 
